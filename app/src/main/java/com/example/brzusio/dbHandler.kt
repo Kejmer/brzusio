@@ -62,7 +62,9 @@ class dbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return list
     }
 
-    fun deleteSong(song) {
-
+    fun deleteSong(song: Song) {
+        val db = this.writableDatabase
+        db.delete(TABLE_NAME, COL_ID + " = " + song.id)
+        db.close()
     }
 }
