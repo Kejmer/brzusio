@@ -24,38 +24,45 @@ class dbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
     }
 
+    private fun resultValueToString(result: Long): String {
+        if (result == (-1).toLong())
+            return "Failed"
+        return "Success"
+    }
+
     fun insertSong(song: Song) {
         val db = this.writableDatabase
         var cv = ContentValues()
         cv.put(COL_NAME, song.title)
         cv.put(COL_ARTIST, song.artist)
         var result = db.insert(TABLE_NAME, null, cv)
-        if (result == -1.toLong())
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-        else
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, resultValueToString(result), Toast.LENGTH_SHORT).show()
     }
 
     fun randomSongs() : MutableList<Song> {
         val list : MutableList<Song> = ArrayList()
 
         val db = this.readableDatabase
-        val query = "SELECT * FROM " + TABLE_NAME + " ORDER BY RANDOM() LIMIT 10"
+        val query = "SELECT * FROM $TABLE_NAME ORDER BY RANDOM() LIMIT 10"
         val result = db.rawQuery(query, null)
 
         if (result.moveToFirst()) {
             do {
-                var song = Song(result.getString(
-                    result.getColumnIndex(COL_NAME)),
+                var song = Song(
+                    result.getString(result.getColumnIndex(COL_ID)).toInt(),
+                    result.getString(result.getColumnIndex(COL_NAME)),
                     result.getString(result.getColumnIndex(COL_ARTIST))
                 );
                 list.add(song)
-
             } while (result.moveToNext())
         }
 
         result.close()
         db.close()
         return list
+    }
+
+    fun deleteSong(song) {
+
     }
 }

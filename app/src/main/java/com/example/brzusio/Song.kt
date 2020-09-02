@@ -1,14 +1,12 @@
 package com.example.brzusio
 
-class Song(song_name: String, artist_name: String) {
-    val title = song_name
-    val artist = artist_name
+import java.io.StringBufferInputStream
 
-    var correct : Boolean
-
-    init {
-        correct = false;
-    }
+class Song(id: Int, title: String, artist: String) {
+    var id : Int = id
+    var title : String = title
+    var artist : String = artist
+    var correct : Boolean = false
 
     fun guessed_correctly() {
         correct = true;
