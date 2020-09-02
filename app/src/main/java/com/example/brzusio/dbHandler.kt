@@ -35,4 +35,27 @@ class dbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         else
             Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
     }
+
+    fun randomSongs() : MutableList<Song> {
+        val list : MutableList<Song> = ArrayList()
+
+        val db = this.readableDatabase
+        val query = "SELECT * FROM " + TABLE_NAME + " ORDER BY RANDOM() LIMIT 10"
+        val result = db.rawQuery(query, null)
+
+        if (result.moveToFirst()) {
+            do {
+                var song = Song(result.getString(
+                    result.getColumnIndex(COL_NAME)),
+                    result.getString(result.getColumnIndex(COL_ARTIST))
+                );
+                list.add(song)
+
+            } while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
 }
