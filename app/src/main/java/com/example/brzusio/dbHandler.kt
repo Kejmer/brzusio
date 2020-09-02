@@ -32,10 +32,10 @@ class dbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     fun insertSong(song: Song) {
         val db = this.writableDatabase
-        var cv = ContentValues()
+        val cv = ContentValues()
         cv.put(COL_NAME, song.title)
         cv.put(COL_ARTIST, song.artist)
-        var result = db.insert(TABLE_NAME, null, cv)
+        val result = db.insert(TABLE_NAME, null, cv)
         Toast.makeText(context, resultValueToString(result), Toast.LENGTH_SHORT).show()
     }
 
@@ -48,7 +48,7 @@ class dbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
         if (result.moveToFirst()) {
             do {
-                var song = Song(
+                val song = Song(
                     result.getString(result.getColumnIndex(COL_ID)).toInt(),
                     result.getString(result.getColumnIndex(COL_NAME)),
                     result.getString(result.getColumnIndex(COL_ARTIST))
@@ -64,7 +64,7 @@ class dbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     fun deleteSong(song: Song) {
         val db = this.writableDatabase
-        db.delete(TABLE_NAME, COL_ID + " = " + song.id)
+        db.delete(TABLE_NAME, "$COL_ID = ?", arrayOf(song.id.toString()))
         db.close()
     }
 }
