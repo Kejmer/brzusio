@@ -12,12 +12,12 @@ const val COL_ID = "id"
 const val COL_NAME = "title"
 const val COL_ARTIST = "artist"
 
-class dbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
+class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_NAME + " VARCHAR(256), " +
-                COL_ARTIST + " INTEGER)";
+                COL_ARTIST + " VARCHAR(256))";
         db?.execSQL(createTable)
     }
 
