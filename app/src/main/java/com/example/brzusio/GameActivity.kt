@@ -1,17 +1,26 @@
 package com.example.brzusio
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 
 class GameActivity : AppCompatActivity() {
 
     private var songList : MutableList<Song> = ArrayList()
     private var roundNo : Int = 0
+
+    private fun viewSongTitle() : TextView {
+        return TextView(findViewById(R.id.song_name))
+    }
+
+    private fun viewSongArtist() : TextView {
+        return TextView(findViewById(R.id.song_artist))
+    }
+
+    private fun currentSong() : Song {
+        return songList[roundNo]
+    }
 
     private fun isLast() : Boolean {
         return roundNo >= songList.size
@@ -27,15 +36,16 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun displayCurrent() {
-
+        viewSongTitle().text = currentSong().title
+        viewSongArtist().text = currentSong().artist
     }
 
     private fun displayEndScreen() {
-
+        
     }
 
     private fun correctAnswer() {
-        songList[roundNo].guessed_correctly()
+        currentSong().guessed_correctly()
         nextSong()
     }
 
