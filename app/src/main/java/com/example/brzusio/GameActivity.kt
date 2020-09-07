@@ -59,18 +59,18 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-//        val context = this
-//        val db = DbHandler(context)
-//
-//        this.songList = db.randomSongs()
-//
-//        findViewById<Button>(R.id.correct_button).setOnClickListener {
-//            correctAnswer()
-//        }
-//
-//        findViewById<Button>(R.id.skip_button).setOnClickListener {
-//            nextSong()
-//        }
+        val context = this
+        val db = DbHandler(context)
+
+        this.songList = db.randomSongs()
+
+        findViewById<Button>(R.id.correct_button).setOnClickListener {
+            correctAnswer()
+        }
+
+        findViewById<Button>(R.id.skip_button).setOnClickListener {
+            nextSong()
+        }
 
 //        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
