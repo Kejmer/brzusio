@@ -10,12 +10,12 @@ class GameActivity : AppCompatActivity() {
     private var songList : MutableList<Song> = ArrayList()
     private var roundNo : Int = 0
 
-    private fun viewSongTitle() : TextView {
-        return TextView(findViewById(R.id.song_name))
+    private fun setTitle(name : String) {
+        findViewById<TextView>(R.id.song_name).text = name
     }
 
-    private fun viewSongArtist() : TextView {
-        return TextView(findViewById(R.id.song_artist))
+    private fun setArtist(name : String) : TextView {
+        findViewById<TextView>(R.id.song_artist).text = name
     }
 
     private fun currentSong() : Song {
@@ -36,12 +36,12 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun displayCurrent() {
-        viewSongTitle().text = currentSong().title
-        viewSongArtist().text = currentSong().artist
+        setTitle(currentSong().title)
+        setArtist(currentSong().artist)
     }
 
     private fun displayEndScreen() {
-        
+        setTitle("END")
     }
 
     private fun correctAnswer() {
@@ -60,7 +60,7 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         val context = this
-        var db = DbHandler(context)
+        val db = DbHandler(context)
 
         this.songList = db.randomSongs()
 
