@@ -14,7 +14,7 @@ class GameActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.song_name).text = name
     }
 
-    private fun setArtist(name : String) : TextView {
+    private fun setArtist(name : String) {
         findViewById<TextView>(R.id.song_artist).text = name
     }
 
