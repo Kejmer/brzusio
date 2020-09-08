@@ -86,4 +86,10 @@ class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         db.delete(TABLE_NAME, "$COL_ID = ?", arrayOf(song.id.toString()))
         db.close()
     }
+
+    fun addSong(song: Song) {
+        val db = this.writableDatabase
+        insertSong(db, song)
+        db.close()
+    }
 }
