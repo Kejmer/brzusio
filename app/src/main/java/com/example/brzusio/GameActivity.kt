@@ -23,7 +23,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun isLast() : Boolean {
-        return roundNo >= songList.size
+        return roundNo >= songList.size - 1
     }
 
     private fun nextSong() {
@@ -41,7 +41,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun displayEndScreen() {
-        setTitle("END")
+        setContentView(R.layout.final_score)
     }
 
     private fun correctAnswer() {
@@ -61,8 +61,9 @@ class GameActivity : AppCompatActivity() {
 
         val context = this
         val db = DbHandler(context)
-
         this.songList = db.randomSongs()
+
+        displayCurrent()
 
         findViewById<Button>(R.id.correct_button).setOnClickListener {
             correctAnswer()
