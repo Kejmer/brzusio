@@ -19,66 +19,65 @@ class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 COL_NAME + " VARCHAR(256), " +
                 COL_ARTIST + " VARCHAR(256))";
         db?.execSQL(createTable)
-        initSongs()
+        initSongs(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP IF TABLE EXISTS $TABLE_NAME")
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
 
-    private fun resultValueToString(result: Long): String {
+    private fun resultValueToString(result: Long?): String {
         if (result == (-1).toLong())
             return "Failed"
         return "Success"
     }
 
-    fun insertSong(song: Song) {
-        val db = this.writableDatabase
+    private fun insertSong(db : SQLiteDatabase?, song: Song) {
         val cv = ContentValues()
         cv.put(COL_NAME, song.title)
         cv.put(COL_ARTIST, song.artist)
-        val result = db.insert(TABLE_NAME, null, cv)
+        val result = db?.insert(TABLE_NAME, null, cv)
         Toast.makeText(context, resultValueToString(result), Toast.LENGTH_SHORT).show()
     }
 
-    private fun initSongs() {
-        insertSong(Song(0, "Skyfall", "Adele"))
-        insertSong(Song(0, "W dobrą stronę", "Dawid Podsiadło"))
-        insertSong(Song(0, "No pokaż na co cię stać", "Feel"))
-        insertSong(Song(0, "To co nam było", "Red Lips"))
-        insertSong(Song(0, "Chciałbym być sobą", "Perfect"))
-        insertSong(Song(0, "Radio hello", "Enej"))
-        insertSong(Song(0, "Póki na to czas", "De Mono"))
-        insertSong(Song(0, "Idę na plażę", "Video"))
-        insertSong(Song(0, "Jeden Moment", "Pectus"))
-        insertSong(Song(0, "A ja wolę swoją mamę", "Majka Jeżowska"))
-        insertSong(Song(0, "Californication", "Red Hot Chilli Peppers"))
-        insertSong(Song(0, "I will survive", "Gloria Gaynor"))
-        insertSong(Song(0, "Kiedyś cię znajdę", "Reni Jusis"))
-        insertSong(Song(0, "Typ niepokorny", "Stachursky"))
+    private fun initSongs(db : SQLiteDatabase?) {
+        insertSong(db, Song(0, "Skyfall", "Adele"))
+        insertSong(db, Song(0, "W dobrą stronę", "Dawid Podsiadło"))
+        insertSong(db, Song(0, "No pokaż na co cię stać", "Feel"))
+        insertSong(db, Song(0, "To co nam było", "Red Lips"))
+        insertSong(db, Song(0, "Chciałbym być sobą", "Perfect"))
+        insertSong(db, Song(0, "Radio hello", "Enej"))
+        insertSong(db, Song(0, "Póki na to czas", "De Mono"))
+        insertSong(db, Song(0, "Idę na plażę", "Video"))
+        insertSong(db, Song(0, "Jeden Moment", "Pectus"))
+        insertSong(db, Song(0, "A ja wolę swoją mamę", "Majka Jeżowska"))
+        insertSong(db, Song(0, "Californication", "Red Hot Chilli Peppers"))
+        insertSong(db, Song(0, "I will survive", "Gloria Gaynor"))
+        insertSong(db, Song(0, "Kiedyś cię znajdę", "Reni Jusis"))
+        insertSong(db, Song(0, "Typ niepokorny", "Stachursky"))
     }
 
     fun randomSongs() : MutableList<Song> {
         val list : MutableList<Song> = ArrayList()
 
-//        val db = this.readableDatabase
-//        val query = "SELECT * FROM $TABLE_NAME ORDER BY RANDOM() LIMIT 10"
-//        val result = db.rawQuery(query, null)
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME ORDER BY RANDOM() LIMIT 10"
+        val result = db.rawQuery(query, null)
 
-//        if (result.moveToFirst()) {
-//            do {
-//                val song = Song(
-//                    result.getString(result.getColumnIndex(COL_ID)).toInt(),
-//                    result.getString(result.getColumnIndex(COL_NAME)),
-//                    result.getString(result.getColumnIndex(COL_ARTIST))
-//                );
-//                list.add(song)
-//            } while (result.moveToNext())
-//        }
-//
-//        result.close()
-//        db.close()
+        if (result.moveToFirst()) {
+            do {
+                val song = Song(
+                    result.getInt(result.getColumnIndex(COL_ID)),
+                    result.getString(result.getColumnIndex(COL_NAME)),
+                    result.getString(result.getColumnIndex(COL_ARTIST))
+                );
+                list.add(song)
+            } while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
         return list
     }
 
