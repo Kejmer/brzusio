@@ -58,11 +58,10 @@ class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         insertSong(db, Song(0, "Typ niepokorny", "Stachursky"))
     }
 
-    fun randomSongs() : MutableList<Song> {
+    fun selectSongs(query : String) : MutableList<Song> {
         val list : MutableList<Song> = ArrayList()
 
         val db = this.readableDatabase
-        val query = "SELECT * FROM $TABLE_NAME ORDER BY RANDOM() LIMIT 10"
         val result = db.rawQuery(query, null)
 
         if (result.moveToFirst()) {
@@ -79,6 +78,14 @@ class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         result.close()
         db.close()
         return list
+    }
+
+    fun randomSongs() : MutableList<Song> {
+        return selectSongs("SELECT * FROM $TABLE_NAME ORDER BY RANDOM() LIMIT 10")
+    }
+
+    fun allSongs() : MutableList<Song> {
+        return selectSongs("SELECT * FROM $TABLE_NAME")
     }
 
     fun deleteSong(song: Song) {

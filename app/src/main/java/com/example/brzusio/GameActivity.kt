@@ -42,6 +42,8 @@ class GameActivity : AppCompatActivity() {
 
     private fun displayEndScreen() {
         setContentView(R.layout.final_score)
+
+//        findViewById<>
     }
 
     private fun correctAnswer() {
@@ -72,11 +74,5 @@ class GameActivity : AppCompatActivity() {
         findViewById<Button>(R.id.skip_button).setOnClickListener {
             nextSong()
         }
-
-//        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-//        }
     }
-
 }
