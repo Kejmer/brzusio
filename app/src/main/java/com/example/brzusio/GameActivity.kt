@@ -7,7 +7,6 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.brzusio.Model.Song
-import kotlinx.android.synthetic.main.final_score.*
 
 class GameActivity : AppCompatActivity() {
 
@@ -47,6 +46,10 @@ class GameActivity : AppCompatActivity() {
 
     private fun displayEndScreen() {
         setContentView(R.layout.final_score)
+
+        findViewById<Button>(R.id.main_menu).setOnClickListener {
+            this.finish()
+        }
 
         val guessedList = arrayOfNulls<String>(guessed)
         val skippedList = arrayOfNulls<String>(songList.size - guessed)
