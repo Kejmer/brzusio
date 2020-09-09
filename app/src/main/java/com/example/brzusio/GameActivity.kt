@@ -6,8 +6,6 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.example.brzusio.Model.Song
 import kotlinx.android.synthetic.main.final_score.*
 
@@ -49,10 +47,6 @@ class GameActivity : AppCompatActivity() {
 
     private fun displayEndScreen() {
         setContentView(R.layout.final_score)
-
-        findViewById<Button>(R.id.main_menu).setOnClickListener {
-//            Navigation.findNavController(this, R.id.main_menu).navigate(R.id.action_gameActivity_to_FirstFragment)
-        }
 
         val guessedList = arrayOfNulls<String>(guessed)
         val skippedList = arrayOfNulls<String>(songList.size - guessed)

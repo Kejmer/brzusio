@@ -31,9 +31,5 @@
     <activity
         android:id="@+id/gameActivity"
         android:name="com.example.brzusio.GameActivity"
-        android:label="GameActivity" >
-        <action
-            android:id="@+id/action_gameActivity_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </activity>
+        android:label="GameActivity" />
 </navigation>
