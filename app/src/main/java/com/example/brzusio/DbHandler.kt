@@ -34,12 +34,11 @@ class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return "Success"
     }
 
-    private fun insertSong(db : SQLiteDatabase?, song: Song) {
+    private fun insertSong(db : SQLiteDatabase?, song: Song) : Long? {
         val cv = ContentValues()
         cv.put(COL_NAME, song.title)
         cv.put(COL_ARTIST, song.artist)
-        val result = db?.insert(TABLE_NAME, null, cv)
-        Toast.makeText(context, resultValueToString(result), Toast.LENGTH_SHORT).show()
+        return db?.insert(TABLE_NAME, null, cv)
     }
 
     private fun initSongs(db : SQLiteDatabase?) {
@@ -59,7 +58,7 @@ class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         insertSong(db, Song(0, "Typ niepokorny", "Stachursky"))
     }
 
-    fun selectSongs(query : String) : MutableList<Song> {
+    private fun selectSongs(query : String) : MutableList<Song> {
         val list : MutableList<Song> = ArrayList()
 
         val db = this.readableDatabase
@@ -97,7 +96,8 @@ class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     fun addSong(song: Song) {
         val db = this.writableDatabase
-        insertSong(db, song)
+        val result = insertSong(db, song)
+        Toast.makeText(context, resultValueToString(result), Toast.LENGTH_SHORT).show()
         db.close()
     }
 }
