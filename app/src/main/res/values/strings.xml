@@ -15,4 +15,6 @@
     <string name="song_title">Tytuł</string>
     <string name="song_artist">Artysta</string>
     <string name="add_button">Dodaj</string>
+
+    <string name="main_menu">Menu główne</string>
 </resources>

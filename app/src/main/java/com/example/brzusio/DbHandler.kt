@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
+import com.example.brzusio.Model.Song
 
 const val DATABASE_NAME = "brzusioDB"
 const val TABLE_NAME = "songs"

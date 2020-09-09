@@ -1,4 +1,4 @@
-package com.example.brzusio
+package com.example.brzusio.Model
 
 class Song(id: Int, title: String, artist: String) {
     var id : Int = id
