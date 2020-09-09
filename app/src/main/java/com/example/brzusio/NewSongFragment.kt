@@ -6,26 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.brzusio.Model.Song
+import kotlinx.android.synthetic.main.fragment_second.*
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class NewSongFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val context = this
 
-//        view.findViewById<Button>(R.id.button_ok).setOnClickListener {
-//            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-//        }
+        view.findViewById<Button>(R.id.add_song).setOnClickListener {
+            if (name_input.text.toString().isNotEmpty()) {
+                val song = Song(0, name_input.text.toString(), artist_input.text.toString())
+                val db = DbHandler(requireContext())
+                db.addSong(song)
+                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            }
+        }
     }
 }
