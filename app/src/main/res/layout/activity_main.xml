@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
