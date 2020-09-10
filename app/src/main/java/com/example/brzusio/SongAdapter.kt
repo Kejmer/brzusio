@@ -18,7 +18,6 @@ class SongAdapter (
         val layoutInflater : LayoutInflater = LayoutInflater.from(ctx)
         val view : View = layoutInflater.inflate(resources, null)
 
-        val imageView : ImageView = view.findViewById(R.id.image)
         val titleTextView : TextView = view.findViewById(R.id.song_name)
         val artistTextView : TextView = view.findViewById(R.id.song_artist)
 
@@ -27,6 +26,6 @@ class SongAdapter (
         artistTextView.text = song.artist
 
         return view
-//        return super.getView(position, convertView, parent)
     }
+
 }
