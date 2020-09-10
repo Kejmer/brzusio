@@ -1,10 +1,7 @@
 package com.example.brzusio
 
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.brzusio.Model.Song
 
@@ -90,6 +87,10 @@ class GameActivity : AppCompatActivity() {
         val context = this
         val db = DbHandler(context)
         this.songList = db.randomSongs()
+
+        if (songList.size == 0) {
+            songList.add(Song(0, "Any song", "Any artist"))
+        }
 
         displayCurrent()
 
