@@ -22,7 +22,6 @@ class NewSongFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val context = this
 
         view.findViewById<Button>(R.id.add_song).setOnClickListener {
             if (name_input.text.toString().isNotEmpty()) {
