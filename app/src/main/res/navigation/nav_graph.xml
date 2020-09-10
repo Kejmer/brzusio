@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/NewSongFragment" />
+        <action
+            android:id="@+id/action_MainFragment_to_removeSongsFragment"
+            app:destination="@id/removeSongsFragment" />
     </fragment>
     <fragment
         android:id="@+id/NewSongFragment"
@@ -25,4 +28,8 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/MainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/removeSongsFragment"
+        android:name="com.example.brzusio.RemoveSongsFragment"
+        android:label="RemoveSongsFragment" />
 </navigation>

@@ -24,8 +24,11 @@ class MainFragment : Fragment() {
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+        view.findViewById<Button>(R.id.button_second).setOnClickListener {
+            findNavController().navigate(R.id.action_MainFragment_to_removeSongsFragment)
+        }
+
         view.findViewById<Button>(R.id.start_button).setOnClickListener {
-//            findNavController().navigate(R.id.action_FirstFragment_to_gameActivity)
             val intent = Intent(requireContext(), GameActivity::class.java)
             startActivity(intent)
         }
