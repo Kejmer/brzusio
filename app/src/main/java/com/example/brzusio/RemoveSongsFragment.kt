@@ -32,6 +32,7 @@ class RemoveSongsFragment : Fragment() {
 
         listView.setOnItemClickListener { _ : AdapterView<*>, _: View, position : Int, _ : Long ->
             db.deleteSong(list[position])
+            findNavController().navigate(R.id.action_removeSongsFragment_to_MainFragment)
         }
 
     }

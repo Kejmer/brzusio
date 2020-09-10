@@ -31,5 +31,9 @@
     <fragment
         android:id="@+id/removeSongsFragment"
         android:name="com.example.brzusio.RemoveSongsFragment"
-        android:label="RemoveSongsFragment" />
+        android:label="RemoveSongsFragment" >
+        <action
+            android:id="@+id/action_removeSongsFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
 </navigation>
