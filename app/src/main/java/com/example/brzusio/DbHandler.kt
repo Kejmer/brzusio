@@ -85,7 +85,7 @@ class DbHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     fun allSongs() : MutableList<Song> {
-        return selectSongs("SELECT * FROM $TABLE_NAME ORDER BY artist COLLATE NOCASE ASC")
+        return selectSongs("SELECT * FROM $TABLE_NAME ORDER BY $COL_ARTIST, $COL_NAME COLLATE NOCASE ASC")
     }
 
     fun deleteSong(song: Song) {
